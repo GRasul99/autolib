@@ -1,0 +1,1 @@
+in data create a selected book with current book
