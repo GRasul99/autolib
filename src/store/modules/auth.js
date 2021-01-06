@@ -48,7 +48,7 @@ export const actions = {
     }
   },
 
-  async refreshToken({ commit }, refresh) {
+  async refreshToken({ commit, dispatch }, refresh) {
     try {
       const response = await ApiService.refreshToken(refresh)
       const userId = jwtDecode(response.data.access).user_id
@@ -57,9 +57,10 @@ export const actions = {
       ] = `Bearer ${response.data.access}`
       TokenService.saveToken('access', response.data.access)
       commit('SET_USER_ID', userId)
-      console.log('response then auth module')
     } catch (error) {
-      console.log(error.message)
+      if (error.response.status === 401) {
+        dispatch('auth/logout')
+      }
     }
   },
 

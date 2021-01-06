@@ -11,12 +11,14 @@ export const mutations = {
   }
 }
 export const actions = {
-  async fetchFaculties({ commit }) {
+  async fetchFaculties({ commit, dispatch }) {
     try {
       const response = await ApiService.fetchFaculties()
       commit('SET_FACULTIES', response.data)
     } catch (error) {
-      console.log(error.message)
+      if (error.response.status === 401) {
+        dispatch('faculty/fetchFaculties', null, { root: true })
+      }
     }
   }
 }

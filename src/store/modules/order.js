@@ -103,50 +103,58 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchOrders({ commit }) {
-    return ApiService.fetchOrders()
-      .then(response => {
-        commit('SET_ORDERS', response.data.results)
-      })
-      .catch(error => {
-        throw error
-      })
+  async fetchOrders({ commit, dispatch }) {
+    try {
+      const response = await ApiService.fetchOrders()
+      commit('SET_ORDERS', response.data.results)
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch('order/fetchOrders', null, { root: true })
+      }
+      console.log(error.message)
+    }
   },
 
-  fetchActiveOrders({ commit }) {
-    return ApiService.fetchActiveOrders()
-      .then(response => {
-        commit('SET_ACTIVE_ORDERS', response.data.results)
-      })
-      .catch(error => {
-        throw error
-      })
+  async fetchActiveOrders({ commit, dispatch }) {
+    try {
+      const response = await ApiService.fetchActiveOrders()
+      commit('SET_ACTIVE_ORDERS', response.data.results)
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch('order/fetchActiveOrders', null, { root: true })
+      }
+    }
   },
 
-  fetchOrder({ commit }, id) {
-    return ApiService.fetchOrder(id)
-      .then(response => {
-        commit('SET_ORDER', response.data.results)
-      })
-      .catch(error => {
-        throw error
-      })
+  async fetchOrder({ commit, dispatch }, id) {
+    try {
+      const response = await ApiService.fetchOrder(id)
+      commit('SET_ORDER', response.data.results)
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch('order/fetchOrder', id, { root: true })
+      }
+    }
   },
 
-  orderBook(context, order) {
-    return ApiService.orderBook(order)
-      .then(() => {})
-      .catch(error => {
-        throw error
-      })
+  async orderBook(context, order) {
+    try {
+      await ApiService.orderBook(order)
+    } catch (error) {
+      if (error.response.status === 401) {
+        context.dispatch('order/orderBook', order, { root: true })
+      }
+    }
   },
 
-  updateOrder(context, { id, order }) {
-    return ApiService.updateOrder(id, order)
-      .then(() => {})
-      .catch(error => {
-        throw error
-      })
+  async updateOrder(context, { id, order }) {
+    try {
+      await ApiService.updateOrder(id, order)
+    } catch (error) {
+      if (error.response.status === 401) {
+        context.dispatch('order/updateOrder', { id, order }, { root: true })
+      }
+    }
   }
 }
 

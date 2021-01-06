@@ -68,7 +68,7 @@ export default {
         })
         .catch(error => {
           NProgress.done()
-          throw error
+          console.log(error.message)
         })
     }
   }

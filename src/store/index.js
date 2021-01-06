@@ -10,7 +10,7 @@ import * as udc from '@/store/modules/udc.js'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     auth,
     book,
@@ -21,3 +21,5 @@ export default new Vuex.Store({
     udc
   }
 })
+
+export default store

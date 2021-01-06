@@ -16,21 +16,26 @@ export const mutations = {
   }
 }
 export const actions = {
-  async fetchUniversities({ commit }) {
+  async fetchUniversities({ commit, dispatch }) {
     try {
       const response = await ApiService.fetchUniversities()
       commit('SET_UNIVERSITIES', response.data.results)
     } catch (error) {
+      if (error.response.status) {
+        dispatch('university/fetchUniversities', null, { root: true })
+      }
       console.log(error.message)
     }
   },
 
-  async fetchUserUniversity({ commit }, id) {
+  async fetchUserUniversity({ commit, dispatch }, id) {
     try {
       const response = await ApiService.fetchUserUniversity(id)
       commit('SET_USER_UNIVERSITY', response.data)
     } catch (error) {
-      console.log(error.message)
+      if (error.response.status === 401) {
+        dispatch('university/fetchUserUniversity', id, { root: true })
+      }
     }
   }
 }

@@ -19,6 +19,7 @@ if (access) {
   store.commit('auth/SET_USER_ID', userId)
 }
 ApiService.mountInterceptor()
+
 new Vue({
   router,
   store,

@@ -35,58 +35,62 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchBooksInUse({ commit }) {
-    return ApiService.fetchBooksInUse()
-      .then(response => {
-        commit('SET_BOOKS_IN_USE', response.data.results)
-      })
-      .catch(error => {
-        throw error
-      })
+  async fetchBooksInUse({ commit, dispatch }) {
+    try {
+      const response = await ApiService.fetchBooksInUse()
+      commit('SET_BOOKS_IN_USE', response.data.results)
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch('book/fetchBooksInUse', null, { root: true })
+      }
+    }
   },
 
-  async fetchBooks({ commit }, id) {
+  async fetchBooks({ commit, dispatch }, id) {
     try {
       const response = await ApiService.fetchBooks(id)
       commit('SET_BOOKS', response.data.results)
       commit('SET_BOOKS_COUNT', response.data.count)
     } catch (error) {
       if (error.response.status === 401) {
-        this.fetchBooks({ commit }, id)
+        dispatch('book/fetchBooks', id, { root: true })
       }
-      console.log(error.message)
     }
   },
 
-  fetchBooksPagination({ commit }, { id, page }) {
-    return ApiService.fetchBooksPagination(id, page)
-      .then(response => {
-        commit('SET_BOOKS', response.data.results)
-        commit('SET_BOOKS_COUNT', response.data.count)
-      })
-      .catch(error => {
-        throw error
-      })
+  async fetchBooksPagination({ commit, dispatch }, { id, page }) {
+    try {
+      const response = await ApiService.fetchBooksPagination(id, page)
+      commit('SET_BOOKS', response.data.results)
+      commit('SET_BOOKS_COUNT', response.data.count)
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch('book/fetchBooksPagination', { id, page }, { root: true })
+      }
+    }
   },
 
-  async fetchBook({ commit }, id) {
+  async fetchBook({ commit, dispatch }, id) {
     try {
       const response = await ApiService.fetchBook(id)
       commit('SET_BOOK', response.data)
     } catch (error) {
-      console.log(error.message)
+      if (error.response.status === 401) {
+        dispatch('book/fetchBook', id, { root: true })
+      }
     }
   },
 
-  searchBooks({ commit }, search) {
-    return ApiService.searchBooks(search)
-      .then(response => {
-        commit('SET_BOOKS', response.data.results)
-        commit('SET_BOOKS_COUNT', response.data.count)
-      })
-      .catch(error => {
-        throw error
-      })
+  async searchBooks({ commit, dispatch }, search) {
+    try {
+      const response = await ApiService.searchBooks(search)
+      commit('SET_BOOKS', response.data.results)
+      commit('SET_BOOKS_COUNT', response.data.count)
+    } catch (error) {
+      if (error.response.status === 401) {
+        dispatch('book/searchBooks', search, { root: true })
+      }
+    }
   }
 }
 export const getters = {

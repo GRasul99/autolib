@@ -121,18 +121,13 @@ export default {
     ApiService.interceptors.response.use(
       response => response,
       error => {
-        if (error.response.status === 401) {
+        const originalRequest = error.config
+        if (error.response.status === 401 && !originalRequest._retry) {
+          originalRequest._retry = true
           if (TokenService.getToken('refresh')) {
-            store
-              .dispatch('auth/refreshToken', {
-                refresh: TokenService.getToken('refresh')
-              })
-              .then(() => {
-                error.config.headers.Authorization = `Bearer ${TokenService.getToken(
-                  'access'
-                )}`
-                return ApiService(error.config)
-              })
+            store.dispatch('auth/refreshToken', {
+              refresh: TokenService.getToken('refresh')
+            })
           } else {
             store.dispatch('auth/logout').then(() => {})
           }

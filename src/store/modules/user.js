@@ -11,20 +11,24 @@ export const mutations = {
   }
 }
 export const actions = {
-  async fetchUser({ commit }, id) {
+  async fetchUser({ commit, dispatch }, id) {
     try {
       const response = await ApiService.fetchUser(id)
       commit('SET_USER', response.data)
     } catch (error) {
-      console.log(error.message)
+      if (error.response.status === 401) {
+        dispatch('user/fetchUser', id, { root: true })
+      }
     }
   },
 
-  async updateUser(context, { id, newUserData }) {
+  async updateUser({ dispatch }, { id, newUserData }) {
     try {
       await ApiService.updateUser(id, newUserData)
     } catch (error) {
-      console.log(error.message)
+      if (error.response.status === 401) {
+        dispatch('user/updateUser', { id, newUserData }, { root: true })
+      }
     }
   }
 }
