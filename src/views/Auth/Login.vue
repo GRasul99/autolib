@@ -2,13 +2,9 @@
   <div class="px-3">
     <v-card
       width="400"
-      class="mx-auto mt-10 px-2"
-      color="indigo lighten-1"
-      dark
+      class="mx-auto mt-10 px-2 border-shadow rounded-xl mb-15"
     >
-      <v-card-title
-        >Войдите в свой аккаунт чтобы получить доступ к сайту</v-card-title
-      >
+      <p class="text-center text-h6 pt-3 text-uppercase">Вход на сайт</p>
       <v-card-text>
         <v-form ref="form" v-model="valid" validation @submit.prevent="login">
           <v-text-field
@@ -27,16 +23,24 @@
             @click:append="showPassword = !showPassword"
             :rules="[rules.required]"
           />
+          <v-card-actions class="d-flex mb-7">
+            <v-btn @click.prevent="login" color="#3366cc" class="px-13" dark
+              >Войти</v-btn
+            >
+            <v-btn text color="#3366CC" class="text-none">Забыли пароль?</v-btn>
+          </v-card-actions>
+          <v-divider />
         </v-form>
-        <p>
-          Нет аккаунта?
-          <v-btn text to="/register">Зарегистрируйтесь</v-btn>
-        </p>
+        <div class="d-flex flex-column align-center mt-7 mb-5">
+          <p class="mb-0 text-center text--black mb-2">
+            Нет аккаунта?
+          </p>
+          <v-btn to="/register" outlined color="#3366cc" class="text-capitalize"
+            >Зарегистрироваться</v-btn
+          >
+        </div>
       </v-card-text>
       <v-divider />
-      <v-card-actions>
-        <v-btn @click.prevent="login" :disabled="!valid" text>Войти</v-btn>
-      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -57,26 +61,33 @@ export default {
   },
   methods: {
     login() {
-      NProgress.start()
-      this.$store
-        .dispatch('auth/login', {
-          username: this.username,
-          password: this.password
-        })
-        .then(() => {
-          this.$router.push({ name: 'categories-list' })
-        })
-        .catch(error => {
-          NProgress.done()
-          console.log(error.message)
-        })
+      if (this.valid) {
+        NProgress.start()
+        this.$store
+          .dispatch('auth/login', {
+            username: this.username,
+            password: this.password
+          })
+          .then(() => {
+            this.$router.push({ name: 'categories-list' })
+          })
+          .catch(error => {
+            NProgress.done()
+            console.log(error.message)
+          })
+      }
     }
   }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .v-card__title {
   word-break: normal;
+}
+.border-shadow {
+  -webkit-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.2) !important;
+  -moz-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.2) !important;
 }
 </style>

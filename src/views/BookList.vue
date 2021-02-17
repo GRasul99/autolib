@@ -32,16 +32,23 @@
 <script>
 import BookMedia from '@/components/BookMedia'
 import { mapState } from 'vuex'
+import NProgress from 'nprogress'
 export default {
   name: 'BookList',
   data() {
     return {
       page: 1,
-      perPage: 20
+      perPage: 30
     }
   },
   components: {
     BookMedia
+  },
+  created() {
+    NProgress.start()
+  },
+  mounted() {
+    NProgress.done()
   },
   computed: {
     ...mapState(['book']),

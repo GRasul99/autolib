@@ -2,24 +2,15 @@
   <div class="px-3">
     <v-card
       width="400"
-      class="mx-auto mt-10 px-2"
-      color="indigo lighten-1"
-      dark
+      class="mx-auto mt-10 px-2 border-shadow rounded-xl mb-15"
     >
-      <v-card-title
-        >Зарегистрируйтесь чтобы получить доступ к сайту</v-card-title
-      >
+      <p class="text-center text-h6 pt-3 text-uppercase">
+        Регистрация на сайте
+      </p>
       <v-card-text>
         <v-form v-model="valid" ref="form" lazy-validation>
           <!--  FIRST STEP   -->
           <div v-if="currentStep === 1">
-            <v-text-field
-              type="email"
-              v-model="email"
-              label="Почта"
-              prepend-icon="mdi-email"
-              :rules="[rules.required, rules.email]"
-            />
             <v-text-field
               type="text"
               v-model="username"
@@ -36,7 +27,15 @@
               @click:append="showPassword = !showPassword"
               :rules="[rules.required]"
             />
+            <v-text-field
+              type="email"
+              v-model="email"
+              label="Почта"
+              prepend-icon="mdi-email"
+              :rules="[rules.required, rules.email]"
+            />
             <v-select
+              class="rounded-lg"
               placeholder="Выберите роль"
               :items="roles"
               dense
@@ -207,6 +206,45 @@
               :rules="[rules.required]"
             />
           </div>
+          <v-card-actions>
+            <v-btn
+              to="/register"
+              :disabled="!valid"
+              text
+              @click.prevent="next"
+              v-if="currentStep === 1"
+              >Далее</v-btn
+            >
+            <v-btn
+              to="/register"
+              text
+              @click.prevent="prev"
+              v-if="currentStep === 2"
+              >Назад</v-btn
+            >
+            <v-spacer></v-spacer>
+            <v-btn
+              :disabled="!valid"
+              @click.prevent="registerStudent"
+              v-if="currentStep === 2 && role === roles[0]"
+              text
+              >Регистрация</v-btn
+            >
+            <v-btn
+              :disabled="!valid"
+              @click.prevent="registerTeacher"
+              v-if="currentStep === 2 && role === roles[1]"
+              text
+              >Регистрация</v-btn
+            >
+            <v-btn
+              :disabled="!valid"
+              @click.prevent="registerLibrarian"
+              v-if="currentStep === 2 && role === roles[2]"
+              text
+              >Регистрация</v-btn
+            >
+          </v-card-actions>
         </v-form>
         <v-alert
           v-for="error in errors[0]"
@@ -220,45 +258,7 @@
           {{ error[0] }}
         </v-alert>
       </v-card-text>
-      <v-card-actions>
-        <v-btn
-          to="/register"
-          :disabled="!valid"
-          text
-          @click.prevent="next"
-          v-if="currentStep === 1"
-          >Далее</v-btn
-        >
-        <v-btn
-          to="/register"
-          text
-          @click.prevent="prev"
-          v-if="currentStep === 2"
-          >Назад</v-btn
-        >
-        <v-spacer></v-spacer>
-        <v-btn
-          :disabled="!valid"
-          @click.prevent="registerStudent"
-          v-if="currentStep === 2 && role === roles[0]"
-          text
-          >Регистрация</v-btn
-        >
-        <v-btn
-          :disabled="!valid"
-          @click.prevent="registerTeacher"
-          v-if="currentStep === 2 && role === roles[1]"
-          text
-          >Регистрация</v-btn
-        >
-        <v-btn
-          :disabled="!valid"
-          @click.prevent="registerLibrarian"
-          v-if="currentStep === 2 && role === roles[2]"
-          text
-          >Регистрация</v-btn
-        >
-      </v-card-actions>
+
       <v-divider />
       <v-card-actions>
         <p>

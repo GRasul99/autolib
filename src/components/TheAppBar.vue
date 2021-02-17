@@ -1,10 +1,10 @@
 <template>
   <v-app-bar app color="indigo" dark height="72">
-    <v-btn to="/" icon class="mr-6 ml-3 v-btn">
-      <v-avatar tile size="96">
-        <v-img contain src="@/assets/white_logo.png" />
-      </v-avatar>
-    </v-btn>
+    <router-link to="/">
+      <!--      <v-avatar tile size="116">-->
+      <v-img contain src="@/assets/white_logo.png" width="116" />
+      <!--      </v-avatar>-->
+    </router-link>
     <v-spacer />
     <div v-if="userUniversity" class="d-flex align-center">
       <v-avatar tile size="64" class="hidden-xs-only mr-2">
@@ -23,10 +23,11 @@
           flat
           solo-inverted
           hide-details
+          append-icon="mdi-magnify"
+          @click:append="searchBooks"
+          type="search"
+          class="mr-3"
         />
-        <v-btn icon @click.prevent="searchBooks">
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
       </div>
     </v-form>
     <v-toolbar-items>
@@ -99,4 +100,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  text-decoration: none;
+}
+</style>

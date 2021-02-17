@@ -3,7 +3,7 @@ import TokenService from '@/services/TokenService'
 import store from '@/store'
 
 const ApiService = axios.create({
-  baseURL: 'https://autolib.tdtu.uz/api/v1/client',
+  baseURL: 'https://autolib.uz/api/v1/client',
   withCredentials: false,
   headers: {
     'Content-Type': `application/json`,
@@ -20,7 +20,7 @@ export default {
   },
 
   register(credentials) {
-    return ApiService.post('https://autolib.tdtu.uz/auth/users/', credentials)
+    return ApiService.post('https://autolib.uz/auth/users/', credentials)
   },
 
   refreshToken(refresh) {
@@ -29,21 +29,21 @@ export default {
 
   emailConfirm(credentials) {
     return ApiService.post(
-      'https://autolib.tdtu.uz/auth/users/activation/',
+      'https://autolib.uz/auth/users/activation/',
       credentials
     )
   },
 
   resetPasswordConfirm(credentials) {
     return ApiService.post(
-      'https://autolib.tdtu.uz/auth/users/reset_password_confirm/',
+      'https://autolib.uz/auth/users/reset_password_confirm/',
       credentials
     )
   },
 
   resetPassword(email) {
     return ApiService.post(
-      'https://autolib.tdtu.uz/auth/users/reset_password/',
+      'https://autolib.uz/auth/users/reset_password/',
       email
     )
   },
@@ -53,7 +53,6 @@ export default {
   },
 
   updateUser(id, newUserData) {
-    console.log(id)
     return ApiService.put('/user/' + id, newUserData)
   },
 
@@ -125,9 +124,15 @@ export default {
         if (error.response.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true
           if (TokenService.getToken('refresh')) {
-            store.dispatch('auth/refreshToken', {
-              refresh: TokenService.getToken('refresh')
-            })
+            store
+              .dispatch('auth/refreshToken', {
+                refresh: TokenService.getToken('refresh')
+              })
+              .then(() => {
+                ApiService.defaults.headers.common[
+                  'Authorization'
+                ] = `Bearer ${TokenService.getToken('access')}`
+              })
           } else {
             store.dispatch('auth/logout').then(() => {})
           }
