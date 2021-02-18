@@ -277,7 +277,9 @@
               Есть аккаунт?
             </p>
             <p class="text-center mb-0">
-              <v-btn color="#3366cc" class="px-20" dark outlined>Войти</v-btn>
+              <v-btn to="/login" color="#3366cc" class="px-20" dark outlined
+                >Войти</v-btn
+              >
             </p>
           </v-col>
         </v-row>
