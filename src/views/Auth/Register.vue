@@ -100,6 +100,7 @@
               append-icon="mdi-mail"
               counter="9"
               :rules="[rules.required]"
+              v-mask="passportMask"
             />
           </div>
 
@@ -155,6 +156,7 @@
               placeholder="Пасспорт"
               append-icon="mdi-mail"
               :rules="[rules.required]"
+              v-mask="passportMask"
             />
           </div>
 
@@ -201,49 +203,57 @@
             <v-text-field
               type="text"
               v-model="passport_serial_id"
+              v-mask="passportMask"
               placeholder="Пасспорт"
               append-icon="mdi-mail"
               :rules="[rules.required]"
             />
           </div>
           <v-card-actions>
+            <v-spacer />
             <v-btn
               to="/register"
-              :disabled="!valid"
-              text
+              color="#3366cc"
+              class="px-12"
+              dark
               @click.prevent="next"
               v-if="currentStep === 1"
               >Далее</v-btn
             >
             <v-btn
               to="/register"
+              color="#3366cc"
               text
               @click.prevent="prev"
               v-if="currentStep === 2"
               >Назад</v-btn
             >
-            <v-spacer></v-spacer>
+            <v-spacer />
             <v-btn
-              :disabled="!valid"
               @click.prevent="registerStudent"
               v-if="currentStep === 2 && role === roles[0]"
-              text
+              color="#3366cc"
+              class="px-12"
+              dark
               >Регистрация</v-btn
             >
             <v-btn
-              :disabled="!valid"
               @click.prevent="registerTeacher"
               v-if="currentStep === 2 && role === roles[1]"
-              text
+              color="#3366cc"
+              class="px-12"
+              dark
               >Регистрация</v-btn
             >
             <v-btn
-              :disabled="!valid"
               @click.prevent="registerLibrarian"
               v-if="currentStep === 2 && role === roles[2]"
-              text
+              color="#3366cc"
+              class="px-12"
+              dark
               >Регистрация</v-btn
             >
+            <v-spacer v-if="currentStep === 2" />
           </v-card-actions>
         </v-form>
         <v-alert
@@ -261,10 +271,16 @@
 
       <v-divider />
       <v-card-actions>
-        <p>
-          Есть аккаунт?
-          <v-btn text to="/login">Войдите</v-btn>
-        </p>
+        <v-row>
+          <v-col cols="12" class="d-flex justify-center flex-column">
+            <p class="text-center mb-2">
+              Есть аккаунт?
+            </p>
+            <p class="text-center mb-0">
+              <v-btn color="#3366cc" class="px-20" dark outlined>Войти</v-btn>
+            </p>
+          </v-col>
+        </v-row>
       </v-card-actions>
       <v-snackbar v-model="snackbar" timeout="6000">
         Пожалуйста перейдите на почту чтобы подтвердить ваш E-mail
@@ -303,6 +319,7 @@ export default {
     kafedra: '',
     position: '',
     passport_serial_id: '',
+    passportMask: 'AA-#######',
     tel_num: null,
     tel_num_mask: '##-###-##-##',
     dropDownOptions: { disabledDialCode: false },
