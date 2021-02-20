@@ -1,13 +1,22 @@
 <template>
   <v-container fluid>
-    <div class="root-categories">
-      <RootCategory
+    <v-row>
+      <v-col cols="12">
+        <p class="mb-0 font-weight-bold text-h5">Все разделы</p>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col
+        cols="12"
+        sm="6"
+        lg="4"
         v-for="rootUDC in rootUdc"
         :key="rootUDC.id"
-        :rootUDC="rootUDC"
-        class="root-categories__card"
-      />
-    </div>
+        class="d-flex justify-center"
+      >
+        <RootCategory :rootUDC="rootUDC" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -41,17 +50,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.root-categories {
-  display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-gap: 10px;
-}
-@media screen and (max-width: 435px) {
-  .root-categories {
-    justify-content: center;
-  }
-}
-</style>

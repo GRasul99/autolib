@@ -8,9 +8,9 @@
     <v-spacer />
     <div v-if="userUniversity" class="d-flex align-center">
       <v-avatar tile size="64" class="hidden-xs-only mr-2">
-        <v-img contain :src="`https://autolib.tdtu.uz` + userUniversity.logo" />
+        <v-img contain :src="`https://autolib.uz` + userUniversity.logo" />
       </v-avatar>
-      <p class="text-center mb-0 hidden-sm-and-down text-h6">
+      <p class="text-center mb-0 hidden-sm-and-down text-h5">
         {{ userUniversity.name }}
       </p>
     </div>

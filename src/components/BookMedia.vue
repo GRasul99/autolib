@@ -23,19 +23,16 @@
       </p>
     </v-card-text>
     <v-card-actions class="mx-auto mb-3">
-      <!--      <BookDialog :id="book.id" />-->
       <BookModal :id="book.id" />
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import BookModal from '@/components/BookModal'
 export default {
   name: 'BookMedia',
   components: {
-    BookModal
-    // BookDialog: () => import('@/components/BookDialog.vue')
+    BookModal: () => import('@/components/BookModal.vue')
   },
   props: {
     book: {

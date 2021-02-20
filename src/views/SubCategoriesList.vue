@@ -29,8 +29,8 @@
           v-for="book in books"
           :key="book.id"
           cols="12"
-          sm="4"
-          md="3"
+          sm="6"
+          md="4"
           class="d-flex flex-column align-center"
         >
           <BookMedia :book="book" />
