@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import BookMedia from '@/components/BookMedia'
+import BookMedia from '@/components/BookMedia1'
 import { mapState } from 'vuex'
 import NProgress from 'nprogress'
 export default {

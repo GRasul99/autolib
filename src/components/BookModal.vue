@@ -3,11 +3,13 @@
     <v-dialog v-model="modal" persistent max-width="600">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="yellow darken-1"
+          color="#3366cc"
+          dark
+          class="text-capitalize"
           v-bind="attrs"
           v-on="on"
           @click="fetchBook(id)"
-          >Ещё</v-btn
+          >Подробнее</v-btn
         >
       </template>
       <v-card max-width="600">

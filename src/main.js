@@ -10,6 +10,7 @@ import './plugins/vuetify-mask.js'
 import TokenService from '@/services/TokenService'
 import jwtDecode from 'jwt-decode'
 import ApiService from '@/services/ApiService'
+import './assets/tailwind.css'
 Vue.config.productionTip = false
 const access = TokenService.getToken('access')
 if (access) {

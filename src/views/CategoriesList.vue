@@ -9,10 +9,9 @@
       <v-col
         cols="12"
         sm="6"
-        lg="4"
+        md="4"
         v-for="rootUDC in rootUdc"
         :key="rootUDC.id"
-        class="d-flex justify-center"
       >
         <RootCategory :rootUDC="rootUDC" />
       </v-col>

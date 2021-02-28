@@ -10,7 +10,7 @@
       <v-avatar tile size="64" class="hidden-xs-only mr-2">
         <v-img contain :src="`https://autolib.uz` + userUniversity.logo" />
       </v-avatar>
-      <p class="text-center mb-0 hidden-sm-and-down text-h5">
+      <p class="text-center hidden-sm-and-down text-h5 my-3">
         {{ userUniversity.name }}
       </p>
     </div>
@@ -26,7 +26,7 @@
           append-icon="mdi-magnify"
           @click:append="searchBooks"
           type="search"
-          class="mr-3"
+          class="mr-3 rounded-xl"
         />
       </div>
     </v-form>

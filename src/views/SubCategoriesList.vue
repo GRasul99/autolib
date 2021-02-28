@@ -1,49 +1,42 @@
 <template>
   <v-container fluid>
     <div>
-      <div>
-        <!--      <v-row>-->
-        <!--        <v-tabs-->
-        <!--          v-if="subUdc.length > 0"-->
-        <!--          optional-->
-        <!--          align-with-title-->
-        <!--          hide-slider-->
-        <!--          dark-->
-        <!--          background-color="indigo darken-3"-->
-        <!--          height="100"-->
-        <!--        >-->
-        <!--          <v-tabs-slider color="teal lighten-3"></v-tabs-slider>-->
-        <!--          <v-tab-->
-        <!--            aria-multiline="true"-->
-        <!--            class="white&#45;&#45;text"-->
-        <!--            v-for="subCategory in subUdc"-->
-        <!--            :key="subCategory.id"-->
-        <!--            :href="'/subcategories-list/' + subCategory.id"-->
-        <!--            >{{ subCategory.name }}</v-tab-->
-        <!--          >-->
-        <!--        </v-tabs>-->
-        <!--      </v-row>-->
-      </div>
-      <v-row class="mt-2" v-if="books.length > 0">
-        <v-col
-          v-for="book in books"
-          :key="book.id"
-          cols="12"
-          sm="6"
-          md="4"
-          class="d-flex flex-column align-center"
-        >
-          <BookMedia :book="book" />
-        </v-col>
-      </v-row>
-      <div class="text-center" v-if="books.length > 0">
-        <v-pagination
-          v-model="page"
-          :length="Math.ceil(this.booksCount / this.perPage)"
-          :total-visible="7"
-          @input="handlePageChange(page)"
-        ></v-pagination>
-      </div>
+      <!--      <v-row>-->
+      <!--        <v-tabs-->
+      <!--          v-if="subUdc.length > 0"-->
+      <!--          optional-->
+      <!--          align-with-title-->
+      <!--          hide-slider-->
+      <!--          dark-->
+      <!--          background-color="indigo darken-3"-->
+      <!--          height="100"-->
+      <!--        >-->
+      <!--          <v-tabs-slider color="teal lighten-3"></v-tabs-slider>-->
+      <!--          <v-tab-->
+      <!--            aria-multiline="true"-->
+      <!--            class="white&#45;&#45;text"-->
+      <!--            v-for="subCategory in subUdc"-->
+      <!--            :key="subCategory.id"-->
+      <!--            :href="'/subcategories-list/' + subCategory.id"-->
+      <!--            >{{ subCategory.name }}</v-tab-->
+      <!--          >-->
+      <!--        </v-tabs>-->
+      <!--      </v-row>-->
+    </div>
+    <v-row class="mt-2" v-if="books.length > 0">
+      <v-col v-for="book in books" :key="book.id" cols="12" sm="6" md="4">
+        <BookMedia :book="book" />
+      </v-col>
+    </v-row>
+    <div class="text-center" v-if="books.length > 0">
+      <v-pagination
+        v-model="page"
+        :length="Math.ceil(this.booksCount / this.perPage)"
+        :total-visible="7"
+        circle
+        next-aria-label="asd"
+        @input="handlePageChange(page)"
+      ></v-pagination>
     </div>
   </v-container>
 </template>
@@ -78,10 +71,14 @@ export default {
   methods: {
     handlePageChange(page) {
       let number = (page - 1) * 30
-      this.$store.dispatch('book/fetchBooksPagination', {
-        id: this.$route.params.id,
-        page: number
-      })
+      this.$store
+        .dispatch('book/fetchBooksPagination', {
+          id: this.$route.params.id,
+          page: number
+        })
+        .then(() => {
+          window.scrollTo(0, 0)
+        })
     }
   },
   beforeDestroy() {

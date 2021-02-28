@@ -1,23 +1,43 @@
 <template>
-  <v-hover v-slot="{ hover }" open-delay="200">
+  <!--  <v-hover v-slot="{ hover }" open-delay="200">-->
+  <!--    <v-card-->
+  <!--      :class="{ 'on-hover': hover }"-->
+  <!--      :elevation="hover ? 16 : 2"-->
+  <!--      class="d-flex align-center px-6"-->
+  <!--      :to="/subcategories-list/ + rootUDC.id"-->
+  <!--      width="100%"-->
+  <!--      height="100%"-->
+  <!--    >-->
+  <!--      <v-img :src="rootUDC.image" alt="Category" class="justify-start" />-->
+  <!--      <div class="flex">-->
+  <!--        <p class="mb-0 text-center text-decoration-none">{{ rootUDC.name }}</p>-->
+  <!--      </div>-->
+  <!--    </v-card>-->
+  <!--  </v-hover>-->
+  <v-hover v-slot="{ hover }" open-delay="25">
     <v-card
       :class="{ 'on-hover': hover }"
       :elevation="hover ? 16 : 2"
-      width="580"
-      height="250"
-      class="d-flex align-center"
       :to="/subcategories-list/ + rootUDC.id"
+      height="100%"
+      class="px-6 d-flex"
     >
-      <img
-        :src="rootUDC.image"
-        alt="Category"
-        width="150"
-        height="150"
-        class="justify-start"
-      />
-      <div class="flex px-4">
-        <p class="mb-0 text-center text-decoration-none">{{ rootUDC.name }}</p>
-      </div>
+      <v-row align="center">
+        <v-col cols="6">
+          <v-img
+            :src="rootUDC.image"
+            alt="Category"
+            class="justify-start"
+            max-height="150"
+            max-width="150"
+          />
+        </v-col>
+        <v-col cols="6">
+          <p class="mb-0 text-decoration-none">
+            {{ rootUDC.name }}
+          </p>
+        </v-col>
+      </v-row>
     </v-card>
   </v-hover>
 </template>
@@ -33,3 +53,5 @@ export default {
   }
 }
 </script>
+
+<style></style>
