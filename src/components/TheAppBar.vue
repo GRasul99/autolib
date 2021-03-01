@@ -37,7 +37,7 @@
             <v-img
               class="rounded-circle"
               v-if="hasAvatar"
-              :src="`https://autolib.tdtu.uz` + user.user.avatar"
+              :src="`https://autolib.uz` + user.user.avatar"
             ></v-img>
             <v-img v-else src="@/assets/avatar2.png" />
           </v-avatar>

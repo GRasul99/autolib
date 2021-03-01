@@ -23,8 +23,15 @@
       <!--        </v-tabs>-->
       <!--      </v-row>-->
     </div>
-    <v-row class="mt-2" v-if="books.length > 0">
-      <v-col v-for="book in books" :key="book.id" cols="12" sm="6" md="4">
+    <v-row class="mt-2" v-if="books.length > 0" no-gutters>
+      <v-col
+        class="py-1 px-1"
+        v-for="book in books"
+        :key="book.id"
+        cols="12"
+        sm="6"
+        lg="4"
+      >
         <BookMedia :book="book" />
       </v-col>
     </v-row>
@@ -34,7 +41,6 @@
         :length="Math.ceil(this.booksCount / this.perPage)"
         :total-visible="7"
         circle
-        next-aria-label="asd"
         @input="handlePageChange(page)"
       ></v-pagination>
     </div>

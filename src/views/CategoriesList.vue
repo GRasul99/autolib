@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container class="container--fluid">
     <v-row>
       <v-col cols="12">
         <p class="mb-0 font-weight-bold text-h5">Все разделы</p>
