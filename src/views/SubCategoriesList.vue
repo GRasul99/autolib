@@ -70,10 +70,12 @@ export default {
   components: {
     BookMedia: () => import('@/components/BookMedia.vue')
   },
-  data: () => ({
-    page: 1,
-    perPage: 30
-  }),
+  data() {
+    return {
+      page: 1,
+      perPage: 30
+    }
+  },
   methods: {
     handlePageChange(page) {
       let number = (page - 1) * 30

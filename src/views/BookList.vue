@@ -13,8 +13,8 @@
         v-for="book in paginatedItems"
         :key="book.id"
         cols="12"
-        sm="4"
-        md="3"
+        sm="6"
+        lg="4"
       >
         <BookMedia :book="book" />
       </v-col>
@@ -24,13 +24,13 @@
         v-model="page"
         :length="Math.ceil(this.book.books.length / this.perPage)"
         :total-visible="7"
+        circle
       ></v-pagination>
     </div>
   </v-container>
 </template>
 
 <script>
-import BookMedia from '@/components/BookMedia1'
 import { mapState } from 'vuex'
 import NProgress from 'nprogress'
 export default {
@@ -42,7 +42,7 @@ export default {
     }
   },
   components: {
-    BookMedia
+    BookMedia: () => import('@/components/BookMedia.vue')
   },
   created() {
     NProgress.start()
@@ -61,5 +61,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

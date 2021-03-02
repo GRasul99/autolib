@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'categories-list',
-    component: () => import(/* */ '@/views/CategoriesList.vue'),
+    component: () => import('@/views/CategoriesList.vue'),
     meta: {
       requiresAuth: true
     }

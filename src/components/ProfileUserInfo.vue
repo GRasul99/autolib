@@ -54,12 +54,20 @@
             </v-toolbar>
             <v-card-text>
               <p
-                v-for="(activeOrder, index) in userActiveOrders"
+                class="mt-0 text-md-body-1"
+                v-for="(activeOrder, index) in userActiveOrders.slice(0, 4)"
                 :key="activeOrder.id"
               >
                 {{ index + 1 }}. {{ activeOrder.book.title }}
               </p>
             </v-card-text>
+            <v-card-actions v-if="userActiveOrders.length > 4">
+              <v-spacer />
+              <v-btn color="#3366cc" dark class="rounded-md mb-4">
+                Полный список
+              </v-btn>
+              <v-spacer />
+            </v-card-actions>
           </v-card>
         </div>
       </div>
@@ -238,6 +246,9 @@ export default {
     }
   },
   methods: {
+    toTab(id) {
+      console.log(id)
+    },
     changePassword() {
       this.errors = []
       this.$store
