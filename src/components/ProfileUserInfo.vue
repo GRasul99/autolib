@@ -25,7 +25,7 @@
               <v-btn
                 outlined
                 color="#3366cc"
-                class="mx-auto hidden-xs-only mt-4"
+                class="mx-auto hidden-xs-only mt-4 rounded-md"
               >
                 Редактировать профиль
               </v-btn>
@@ -246,9 +246,6 @@ export default {
     }
   },
   methods: {
-    toTab(id) {
-      console.log(id)
-    },
     changePassword() {
       this.errors = []
       this.$store
