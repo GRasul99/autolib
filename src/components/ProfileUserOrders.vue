@@ -2,6 +2,7 @@
   <v-data-table
     :items="order.orders"
     :headers="order.userOrdersHeaders"
+    :loading="loading"
     no-data-text="Нет данных"
     no-results-text="Поиск не дал результатов"
   ></v-data-table>
@@ -9,16 +10,20 @@
 
 <script>
 import { mapState } from 'vuex'
-import NProgress from 'nprogress'
 export default {
   name: 'ProfileUserOrders',
+  data() {
+    return {
+      loading: false
+    }
+  },
   computed: {
     ...mapState(['order'])
   },
   created() {
-    NProgress.start()
+    this.loading = true
     this.$store.dispatch('order/fetchOrders').then(() => {
-      NProgress.done()
+      this.loading = false
     })
   }
 }
