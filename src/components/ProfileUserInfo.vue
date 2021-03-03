@@ -203,6 +203,7 @@
 </template>
 
 <script>
+import NProgress from 'nprogress'
 import { mapState } from 'vuex'
 import rules from '@/helpers/rules'
 import moment from 'moment'
@@ -218,6 +219,12 @@ export default {
       email: '',
       snackbar: false
     }
+  },
+  created() {
+    NProgress.start()
+    this.$store.dispatch('order/fetchOrders').then(() => {
+      NProgress.done()
+    })
   },
   computed: {
     ...mapState(['user', 'university', 'order']),

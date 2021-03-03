@@ -10,20 +10,14 @@
             light
             color="#3366cc"
           >
-            <v-tab :key="1">Профиль</v-tab>
-            <v-tab :key="2">Заказы</v-tab>
-            <v-tab :key="3">Активные заказы</v-tab>
-            <v-tab :key="4">Не сданные книги</v-tab>
+            <v-tab v-for="(tabTitle, index) in tabTitles" :key="index + 1">
+              {{ tabTitle }}
+            </v-tab>
             <v-tab-item :key="1">
               <ProfileUserInfo />
             </v-tab-item>
             <v-tab-item :key="2">
-              <v-data-table
-                :items="userOrders"
-                :headers="order.userOrdersHeaders"
-                no-data-text="Нет данных"
-                no-results-text="Поиск не дал результатов"
-              ></v-data-table>
+              <ProfileUserOrders />
             </v-tab-item>
             <v-tab-item :key="3">
               <v-data-table
@@ -58,35 +52,26 @@
 import NProgress from 'nprogress'
 import { mapState } from 'vuex'
 import moment from 'moment'
-import ProfileUserInfo from '@/components/ProfileUserInfo'
 moment.locale('ru')
 export default {
   name: 'Profile',
-  components: { ProfileUserInfo },
+  components: {
+    ProfileUserInfo: () => import('@/components/ProfileUserInfo'),
+    ProfileUserOrders: () => import('@/components/ProfileUserOrders')
+  },
+  data() {
+    return {
+      tabTitles: ['Профиль', 'Заказы', 'Активные заказы', 'Не сданные книги']
+    }
+  },
   mounted() {
     NProgress.start()
-    this.$store.dispatch('order/fetchOrders')
     this.$store.dispatch('book/fetchBooksInUse').then(() => {
       NProgress.done()
     })
   },
   computed: {
-    ...mapState(['order', 'user', 'university', 'book']),
-    userOrders() {
-      return this.order.orders.map(order => {
-        order.time_of_get = moment().to(order.time_of_get)
-        if (order.time_of_take_away === null) order.time_of_take_away = ''
-        else order.time_of_take_away = moment().to(order.time_of_take_away)
-        if (order.time_of_pass === null) order.time_of_pass = ''
-        else order.time_of_pass = moment().to(order.time_of_pass)
-        return { ...order }
-      })
-    },
-    userActiveOrders() {
-      return this.userOrders.filter(order => {
-        return order.active
-      })
-    }
+    ...mapState(['order', 'user', 'university', 'book'])
   },
   methods: {
     logout() {
