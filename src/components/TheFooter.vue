@@ -1,6 +1,6 @@
 <template>
   <v-footer color="#EAEAEA">
-    <v-row>
+    <v-row justify="center">
       <!--      <v-col cols="12" md="4" class="text-center">-->
       <!--        <v-btn text color="grey" class="text-none text-center">О нас</v-btn>-->
       <!--        <v-btn text color="grey" class="text-none">Условия использования</v-btn>-->
