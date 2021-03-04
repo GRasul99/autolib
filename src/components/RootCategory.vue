@@ -22,22 +22,33 @@
       height="100%"
       class="px-6 d-flex"
     >
-      <v-row align="center">
-        <v-col cols="6">
-          <v-img
-            :src="rootUDC.image"
-            alt="Category"
-            class="justify-start"
-            max-height="150"
-            max-width="150"
-          />
-        </v-col>
-        <v-col cols="6">
-          <p class="mb-0 text-decoration-none">
-            {{ rootUDC.name }}
-          </p>
-        </v-col>
-      </v-row>
+      <div class="flex flex-col items-center lg:flex-row">
+        <v-img
+          :src="rootUDC.image"
+          alt="Category"
+          max-height="150"
+          max-width="150"
+        />
+        <p class="mb-2 text-decoration-none text-center">
+          {{ rootUDC.name }}
+        </p>
+      </div>
+      <!--      <v-row align="center">-->
+      <!--        <v-col cols="6">-->
+      <!--          <v-img-->
+      <!--            :src="rootUDC.image"-->
+      <!--            alt="Category"-->
+      <!--            class="justify-start"-->
+      <!--            max-height="150"-->
+      <!--            max-width="150"-->
+      <!--          />-->
+      <!--        </v-col>-->
+      <!--        <v-col cols="6">-->
+      <!--          <p class="mb-0 text-decoration-none">-->
+      <!--            {{ rootUDC.name }}-->
+      <!--          </p>-->
+      <!--        </v-col>-->
+      <!--      </v-row>-->
     </v-card>
   </v-hover>
 </template>
@@ -54,4 +65,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.v-card,
+.v-card__text,
+.v-card__title {
+  hyphens: auto !important;
+}
+</style>

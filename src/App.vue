@@ -16,3 +16,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.v-card,
+.v-card__text,
+.v-card__title {
+  word-break: normal !important; /* maybe !important  */
+}
+</style>
