@@ -52,6 +52,8 @@
                 color="#3366cc"
                 v-if="book.e_book"
                 class="rounded-xl ml-auto"
+                :href="book.file"
+                target="_blank"
               >
                 Скачать
               </v-btn>

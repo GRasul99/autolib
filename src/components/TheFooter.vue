@@ -6,8 +6,8 @@
       <!--        <v-btn text color="grey" class="text-none">Условия использования</v-btn>-->
       <!--      </v-col>-->
       <v-col cols="12" md="4" class="text-center grey--text">
-        <v-badge icon="mdi-copyright" color="#e5e5e5" class="mr-2 mt-1"
-          >Autolib
+        <v-badge icon="mdi-copyright" color="#e5e5e5" class="mr-2 mt-1">
+          Autolib
         </v-badge>
         {{ new Date().getFullYear() }}
       </v-col>
@@ -21,5 +21,3 @@ export default {
   name: 'TheFooter'
 }
 </script>
-
-<style scoped></style>
