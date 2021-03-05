@@ -1,7 +1,7 @@
 <template>
   <v-card
     elevation="4"
-    class="flex py-2 px-2 rounded-xl"
+    class="d-flex py-2 px-2 rounded-xl"
     height="100%"
     max-width="100%"
   >
