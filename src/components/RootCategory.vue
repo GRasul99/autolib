@@ -33,22 +33,6 @@
           {{ rootUDC.name }}
         </p>
       </div>
-      <!--      <v-row align="center">-->
-      <!--        <v-col cols="6">-->
-      <!--          <v-img-->
-      <!--            :src="rootUDC.image"-->
-      <!--            alt="Category"-->
-      <!--            class="justify-start"-->
-      <!--            max-height="150"-->
-      <!--            max-width="150"-->
-      <!--          />-->
-      <!--        </v-col>-->
-      <!--        <v-col cols="6">-->
-      <!--          <p class="mb-0 text-decoration-none">-->
-      <!--            {{ rootUDC.name }}-->
-      <!--          </p>-->
-      <!--        </v-col>-->
-      <!--      </v-row>-->
     </v-card>
   </v-hover>
 </template>
