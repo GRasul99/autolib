@@ -2,116 +2,122 @@ import axios from 'axios'
 import TokenService from '@/services/TokenService'
 import store from '@/store'
 
-axios.defaults.baseURL = 'https://autolib.uz/api/v1/client'
-axios.defaults.withCredentials = false
-axios.defaults.headers.common['Content-Type'] = `application/json`
-axios.defaults.headers.common['Accept'] = `application/json`
-axios.defaults.timeout = 20000
+const ApiService = axios.create({
+  baseURL: 'https://autolib.uz/api/v1/client',
+  withCredentials: false,
+  headers: {
+    'Content-Type': `application/json`,
+    Accept: `application/json`
+  },
+  timeout: 20000
+})
 
 export default {
-  async login(credentials) {
-    return await axios.post('/token/', credentials)
+  ApiService,
+
+  login(credentials) {
+    return ApiService.post('/token/', credentials)
   },
 
-  async register(credentials) {
-    return await axios.post('https://autolib.uz/auth/users/', credentials)
+  register(credentials) {
+    return ApiService.post('https://autolib.uz/auth/users/', credentials)
   },
 
-  async refreshToken(refresh) {
-    return await axios.post('/token/refresh/', refresh)
+  refreshToken(refresh) {
+    return ApiService.post('/token/refresh/', refresh)
   },
 
-  async emailConfirm(credentials) {
-    return await axios.post(
+  emailConfirm(credentials) {
+    return ApiService.post(
       'https://autolib.uz/auth/users/activation/',
       credentials
     )
   },
 
-  async resetPasswordConfirm(credentials) {
-    return await axios.post(
+  resetPasswordConfirm(credentials) {
+    return ApiService.post(
       'https://autolib.uz/auth/users/reset_password_confirm/',
       credentials
     )
   },
 
-  async resetPassword(email) {
-    return await axios.post(
+  resetPassword(email) {
+    return ApiService.post(
       'https://autolib.uz/auth/users/reset_password/',
       email
     )
   },
 
-  async fetchUser(id) {
-    return await axios.get('/user/' + id)
+  fetchUser(id) {
+    return ApiService.get('/user/' + id)
   },
 
-  async updateUser(id, newUserData) {
-    return await axios.put('/user/' + id, newUserData)
+  updateUser(id, newUserData) {
+    return ApiService.put('/user/' + id, newUserData)
   },
 
-  async fetchUniversities() {
-    return await axios.get('/university/')
+  fetchUniversities() {
+    return ApiService.get('/university/')
   },
 
-  async fetchUserUniversity(id) {
-    return await axios.get('/university/' + id)
+  fetchUserUniversity(id) {
+    return ApiService.get('/university/' + id)
   },
 
-  async fetchBooksInUse() {
-    return await axios.get('/book_in_use/')
+  fetchBooksInUse() {
+    return ApiService.get('/book_in_use/')
   },
 
-  async fetchBooks(id) {
-    return await axios.get('/udc/' + id + '/books/')
+  fetchBooks(id) {
+    return ApiService.get('/udc/' + id + '/books/')
   },
 
-  async fetchBooksPagination(id, page) {
-    return await axios.get('/udc/' + id + '/books/?limit=30&offset=' + page)
+  fetchBooksPagination(id, page) {
+    return ApiService.get('/udc/' + id + '/books/?limit=30&offset=' + page)
   },
 
-  async fetchBook(id) {
-    return await axios.get('/books/' + id + '/')
+  fetchBook(id) {
+    return ApiService.get('/books/' + id + '/')
   },
 
-  async searchBooks(search) {
-    return await axios.get('/books/?search=' + search)
+  searchBooks(search) {
+    return ApiService.get('/books/?search=' + search)
   },
 
-  async fetchFaculties() {
-    return await axios.get('/faculty/')
+  fetchFaculties() {
+    return ApiService.get('/faculty/')
   },
 
-  async fetchOrders() {
-    return await axios.get('/orders/')
+  fetchOrders() {
+    return ApiService.get('/orders/')
   },
 
-  async fetchActiveOrders() {
-    return await axios.get('/active_orders/')
+  fetchActiveOrders() {
+    return ApiService.get('/active_orders/')
   },
 
-  async fetchOrder(id) {
-    return await axios.get('/orders/' + id)
+  fetchOrder(id) {
+    return ApiService.get('/orders/' + id)
   },
 
-  async orderBook(order) {
-    return await axios.post('/orders/create/', order)
+  orderBook(order) {
+    return ApiService.post('/orders/create/', order)
   },
 
-  async updateOrder(id, order) {
-    return await axios.patch('/orders/' + id, order)
+  updateOrder(id, order) {
+    return ApiService.patch('/orders/' + id, order)
   },
 
-  async fetchRootUdc() {
-    return await axios.get('/udc/list/')
+  fetchRootUdc() {
+    return ApiService.get('/udc/list/')
   },
 
-  async fetchSubUdc(id) {
-    return await axios.get('/udc/' + id)
+  fetchSubUdc(id) {
+    return ApiService.get('/udc/' + id)
   },
 
   mountInterceptor() {
-    axios.interceptors.response.use(
+    ApiService.interceptors.response.use(
       response => response,
       error => {
         const originalRequest = error.config
@@ -123,7 +129,7 @@ export default {
                 refresh: TokenService.getToken('refresh')
               })
               .then(() => {
-                axios.defaults.headers.common[
+                ApiService.defaults.headers.common[
                   'Authorization'
                 ] = `Bearer ${TokenService.getToken('access')}`
               })
