@@ -31,18 +31,40 @@
       </div>
     </v-form>
     <v-toolbar-items>
-      <div v-if="isAuth" class="d-flex align-center ml-1">
-        <v-btn to="/profile" text icon>
-          <v-avatar size="48">
-            <v-img
-              class="rounded-circle"
-              v-if="hasAvatar"
-              :src="`https://autolib.uz` + user.user.avatar"
-            ></v-img>
-            <v-img v-else src="@/assets/avatar2.png" />
-          </v-avatar>
-        </v-btn>
-      </div>
+      <!--      <div v-if="isAuth" class="d-flex align-center ml-1">-->
+      <!--        <v-btn to="/profile" text icon>-->
+      <!--                <v-avatar size="48">-->
+      <!--                  <v-img-->
+      <!--                    class="rounded-circle"-->
+      <!--                    v-if="hasAvatar"-->
+      <!--                    :src="`https://autolib.uz` + user.user.avatar"-->
+      <!--                  ></v-img>-->
+      <!--                  <v-img v-else src="@/assets/avatar2.png" />-->
+      <!--                </v-avatar>-->
+      <!--        </v-btn>-->
+      <!--      </div>-->
+      <v-menu open-on-hover offset-y v-if="isAuth">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" text v-bind="attrs" v-on="on">
+            <v-avatar size="48">
+              <v-img
+                class="rounded-circle"
+                v-if="hasAvatar"
+                :src="`https://autolib.uz` + user.user.avatar"
+              ></v-img>
+              <v-img v-else src="@/assets/avatar2.png" />
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <router-link class="px-2" to="/profile">Профиль</router-link>
+          </v-list-item>
+          <v-list-item>
+            <button @click="logout" class="px-2">Выход</button>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <div v-if="!isAuth" class="d-flex align-center">
         <v-btn to="/login" text>Вход</v-btn>
         <v-btn to="/register" text>Регистрация</v-btn>
@@ -95,6 +117,9 @@ export default {
           this.$router.push({ name: 'book-list' }, () => {})
         })
       } else this.snackbar = true
+    },
+    logout() {
+      this.$store.dispatch('auth/logout')
     }
   }
 }

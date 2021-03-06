@@ -43,9 +43,6 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row align="end" justify="end">
-      <v-btn text @click="logout">Выход</v-btn>
-    </v-row>
   </v-container>
 </template>
 <script>
@@ -74,9 +71,6 @@ export default {
     ...mapState(['order', 'user', 'university', 'book'])
   },
   methods: {
-    logout() {
-      this.$store.dispatch('auth/logout')
-    },
     deleteItem(item) {
       const order = {
         book: item.book.id,
