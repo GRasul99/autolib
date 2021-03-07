@@ -55,7 +55,7 @@
                 class="rounded-circle"
                 v-if="hasAvatar"
                 :src="`https://autolib.uz` + user.user.avatar"
-              ></v-img>
+              />
               <v-img v-else>
                 <v-icon>mdi-account-circle</v-icon>
               </v-img>
