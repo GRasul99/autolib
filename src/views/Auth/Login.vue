@@ -24,9 +24,15 @@
             :rules="[rules.required]"
           />
           <v-card-actions class="d-flex mb-7">
-            <v-btn @click.prevent="login" color="#3366cc" class="px-13" dark
-              >Войти</v-btn
+            <v-btn
+              dark
+              @click.prevent="login"
+              class="px-13 bg-blue-700"
+              text
+              :disabled="!valid"
             >
+              Войти
+            </v-btn>
             <v-btn text color="#3366CC" class="text-none">Забыли пароль?</v-btn>
           </v-card-actions>
           <v-divider />
