@@ -41,8 +41,13 @@
           <p class="mb-0 text-center text--black mb-2">
             Нет аккаунта?
           </p>
-          <v-btn to="/register" outlined color="#3366cc" class="text-capitalize"
-            >Зарегистрироваться</v-btn
+          <v-btn
+            to="/register"
+            outlined
+            color="#3366cc"
+            class="text-capitalize"
+          >
+            Зарегистрироваться</v-btn
           >
         </div>
       </v-card-text>

@@ -1,9 +1,7 @@
 <template>
   <v-app-bar app color="indigo" dark height="72">
     <router-link to="/">
-      <!--      <v-avatar tile size="116">-->
-      <v-img contain src="@/assets/white_logo.png" width="116" />
-      <!--      </v-avatar>-->
+      <v-img contain src="@/assets/logo.png" width="116" />
     </router-link>
     <v-spacer />
     <div v-if="userUniversity" class="d-flex align-center">
@@ -58,7 +56,9 @@
                 v-if="hasAvatar"
                 :src="`https://autolib.uz` + user.user.avatar"
               ></v-img>
-              <v-img v-else src="@/assets/avatar2.png" />
+              <v-img v-else>
+                <v-icon>mdi-account-circle</v-icon>
+              </v-img>
             </v-avatar>
           </v-btn>
         </template>
