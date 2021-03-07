@@ -4,11 +4,16 @@ import TokenService from '@/services/TokenService'
 
 Vue.use(VueRouter)
 
+const lazyLoad = componentPath => {
+  return () =>
+    import(/* webpackChunkName: '[request]' */ `@/views/${componentPath}.vue`)
+}
+
 const routes = [
   {
     path: '/',
     name: 'categories-list',
-    component: () => import('@/views/CategoriesList.vue'),
+    component: lazyLoad('CategoriesList'),
     meta: {
       requiresAuth: true
     }
@@ -16,7 +21,7 @@ const routes = [
   {
     path: '/subcategories-list/:id',
     name: 'subcategories-list',
-    component: () => import('@/views/SubCategoriesList.vue'),
+    component: lazyLoad('SubCategoriesList'),
     meta: {
       requiresAuth: true
     }
@@ -24,7 +29,7 @@ const routes = [
   {
     path: '/book-list',
     name: 'book-list',
-    component: () => import('@/views/BookList.vue'),
+    component: lazyLoad('BookList'),
     meta: {
       requiresAuth: true
     }
@@ -32,7 +37,7 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: () => import('@/views/Profile.vue'),
+    component: lazyLoad('Profile'),
     meta: {
       requiresAuth: true
     }
@@ -40,22 +45,22 @@ const routes = [
   {
     path: '/change-password/:uid/:token',
     name: 'change-password',
-    component: () => import('@/views/Auth/ChangePassword.vue')
+    component: lazyLoad('Auth/ChangePassword')
   },
   {
     path: '/email-confirm/:uid/:token',
     name: 'email-confirm',
-    component: () => import('@/views/Auth/EmailConfirm.vue')
+    component: lazyLoad('Auth/EmailConfirm')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Auth/Login.vue')
+    component: lazyLoad('Auth/Login')
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/views/Auth/Register.vue')
+    component: lazyLoad('Auth/Register')
   }
 ]
 
