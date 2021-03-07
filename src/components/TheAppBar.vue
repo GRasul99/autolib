@@ -45,7 +45,13 @@
       <!--      </div>-->
       <v-menu open-on-hover offset-y v-if="isAuth">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" text v-bind="attrs" v-on="on">
+          <v-btn
+            :to="{ name: 'profile' }"
+            color="primary"
+            text
+            v-bind="attrs"
+            v-on="on"
+          >
             <v-avatar size="48">
               <v-img
                 class="rounded-circle"
