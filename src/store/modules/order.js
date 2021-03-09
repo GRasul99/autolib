@@ -17,18 +17,13 @@ export const state = {
       sortable: false
     },
     {
-      text: 'ISBN',
+      text: 'Инвентаризационный номер',
       value: 'book.isbn',
       sortable: false
     },
     {
       text: 'Время получения книги',
       value: 'time_of_get',
-      sortable: false
-    },
-    {
-      text: 'Получил',
-      value: 'time_of_take_away',
       sortable: false
     },
     {
@@ -49,7 +44,7 @@ export const state = {
       sortable: false
     },
     {
-      text: 'ISBN',
+      text: 'Инвентаризационный номер',
       value: 'book.isbn',
       sortable: false
     },
@@ -76,7 +71,7 @@ export const state = {
       sortable: false
     },
     {
-      text: 'ISBN',
+      text: 'Инвентаризационный номер',
       value: 'book.isbn',
       sortable: false
     },
