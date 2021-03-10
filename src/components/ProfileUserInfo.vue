@@ -3,7 +3,7 @@
     <v-divider class="mt-4" />
     <v-container fluid>
       <div class="flex flex-col md:flex-row mt-8">
-        <div class="flex flex-col md:mr-8 mb-6 md:w-1/2">
+        <div class="flex flex-col md:mr-8 mb-6 md:w-1/2 px-4">
           <div class="flex">
             <v-avatar size="116">
               <v-img
@@ -25,7 +25,7 @@
               <v-btn
                 outlined
                 color="#3366cc"
-                class="mx-auto hidden-xs-only mt-4 rounded-md"
+                class="mx-auto hidden-xs-only mt-4 rounded-lg"
               >
                 Редактировать профиль
               </v-btn>
